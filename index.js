@@ -11,6 +11,7 @@ const BASE_URL =
 
 app.get("/google-report", async (req, res) => {
   try {
+    console.log(req.query);
     const start = req.query.start;
     const end = req.query.end;
     const region = req.query.region;
@@ -40,6 +41,7 @@ app.get("/google-report", async (req, res) => {
 
     data = JSON.parse(data);
     data = data[0][1];
+    data = data.map((item) => [item[0], item[1][0][1]]);
     res.status(200).json(data);
   } catch (err) {
     console.log(err);
